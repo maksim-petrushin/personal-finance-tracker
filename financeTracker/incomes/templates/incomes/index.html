@@ -1,9 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Incomes</title>
-    </head>
-    <body>
-        <h1>Hello ASD</h1>
-    </body>
-</html>
+{% extends "incomes/layout.html" %}
+
+{% block body %}
+    <h1>Incomes</h1>
+    <ul>
+        {% for income in incomes %}
+            <li> {{ income.id}}:  {{income}} </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
