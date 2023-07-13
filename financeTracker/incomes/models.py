@@ -11,3 +11,4 @@ class Income(models.Model):
 
     def __str__(self):
         return f"ID: {self.id} | AMOUNT: ${self.incAmount}| CATEGORY: {self.category} | DATE: {self.incDate} | DESCRIPTION: {self.description} | "
+    
