@@ -7,7 +7,7 @@ class AppUsers(models.Model):
     last = models.CharField(max_length=64,blank=False)
 
     def __str__(self):
-        return f"name: {self.first} {self.last}"
+        return f"{self.first} {self.last}"
 
 
 class Income(models.Model): 

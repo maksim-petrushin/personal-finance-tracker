@@ -1,10 +1,10 @@
 {% extends "incomes/layout.html" %}
 
 {% block body %}
-    <h1>Incomes</h1>
+    <h1>all our customers</h1>
     <ul>
-        {% for income in incomes %}
-            <li> {{ income.id}}:  {{income}} </li>
+        {% for person in appusers %}
+        <li> <a href="{% url 'user' person.id %}">{{person}}</a> </li>
         {% endfor %}
     </ul>
 

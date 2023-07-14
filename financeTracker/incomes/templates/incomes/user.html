@@ -1,0 +1,13 @@
+{% extends "incomes/layout.html" %}
+
+{% block body %}
+    <h1> Incomes of {{incomes.first.person}}</h1>
+    <ul>
+        {% for income in incomes %}
+            <li> ${{income.incAmount}} - from {{income.category}} </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'index1' %}">Back to all customers</a>
+
+{% endblock %}

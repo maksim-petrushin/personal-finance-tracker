@@ -1,16 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Income
+from .models import Income, AppUsers
 
 # Create your views here.
-
-def index(request):
+ 
+def index1(request):
     return render(request, "incomes/index.html",{
-        "incomes": Income.objects.all()
+        "appusers": AppUsers.objects.all()
     })
-
-
-def greet(request, name):
-    return render(request, "incomes/greet.html",{
-        "name" : name.capitalize()
+def user(request, user_id):
+    user = AppUsers.objects.get(pk=user_id)
+    return render(request, "incomes/user.html",{
+        "incomes": user.pluses.all()
     })
+ 
+
