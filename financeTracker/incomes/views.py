@@ -12,7 +12,27 @@ def user(request, user_id):
     user = AppUsers.objects.get(pk=user_id)
     return render(request, "incomes/user.html",{
         "incomes": user.pluses.all(),
-        "expenses": user.minuses.all()
+        "expenses": user.minuses.all(),
+        "sumInc": incomeSum(user_id),
+        "sumExp": expenseSum(user_id),
+        "sumNet": netSum(user_id)
     })
- 
+
+def incomeSum(user_id):
+    sum = 0
+    user = AppUsers.objects.get(pk=user_id).pluses.all()
+    for expense in user:
+        sum+=expense.incAmount
+    return sum
+
+def expenseSum(user_id):
+    sum = 0
+    user = AppUsers.objects.get(pk=user_id).minuses.all()
+    for expense in user:
+        sum+=expense.expAmount
+    return sum
+
+def netSum(user_id):
+    return incomeSum(user_id)-expenseSum(user_id)
+
 

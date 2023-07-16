@@ -3,21 +3,30 @@
 {% block body %}
 
     <h1> Profile of {{incomes.first.person}}</h1>
-
-    <h2> Incomes</h2>
+    <a href="{% url 'index1' %}">Back to all customers</a>
+    <h2> List of Incomes</h2>
     <ul>
         {% for income in incomes %}
             <li> ${{income.incAmount}} - from {{income.category}} </li>
         {% endfor %}
     </ul>
     
-    <h2> Expenses</h2>
+    <h2> List of Expenses</h2>
     <ul>
         {% for expense in expenses %}
             <li> ${{expense.expAmount}} - from {{expense.category}} </li>
         {% endfor %}
     </ul>
+    <h3>SUM of incomes</h3>
+    <p> ${{ sumInc}}</p>
+    <h3>SUM of expenses</h3>
+    <p> ${{ sumExp}}</p>
+    <h3>Net Balance</h3>
+    <p> ${{ sumNet}}</p>
+    <script>
 
-    <a href="{% url 'index1' %}">Back to all customers</a>
+    </script>
+
+    
 
 {% endblock %}
