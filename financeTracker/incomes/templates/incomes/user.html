@@ -1,32 +1,88 @@
 {% extends "incomes/layout.html" %}
 
 {% block body %}
+<head>
+    <title>Customers</title>
+    <script>
+        function showPage(page){
+            document.querySelectorAll('div').forEach(div=>{
+                div.style.display = 'none';
+            })
+            document.querySelector(`#${page}`).style.display = 'block';
+        }
 
+        document.addEventListener('DOMContentLoaded', function(){
+            document.querySelectorAll('button').forEach(button=>{
+                button.onclick = function(){
+                    showPage(this.dataset.page);
+                }
+
+            });
+        });
+    </script>
+    <style>
+        div {
+            display:none;
+        }
+    </style>
+</head>
+
+<body>
+   
     <h1> Profile of {{incomes.first.person}}</h1>
+    <button data-page="list_incomes">List of Incomes</button>
+    <button data-page="list_expenses">List of Expenses</button>
+    <button data-page="sum_incomes">Sum of Incomes</button>
+    <button data-page="sum_expenes">Sum of Expenses</button>
+    <button data-page="sum_net">Net of Sum</button>
     <a href="{% url 'index1' %}">Back to all customers</a>
-    <h2> List of Incomes</h2>
-    <ul>
-        {% for income in incomes %}
-            <li> ${{income.incAmount}} - from {{income.category}} </li>
-        {% endfor %}
-    </ul>
+    <div id="list_incomes">
+        <h3> List of Incomes</h3>
+        <ul>
+            {% for income in incomes %}
+                <li> ${{income.incAmount}} - from {{income.category}} </li>
+            {% endfor %}
+        </ul>
+    </div>
     
-    <h2> List of Expenses</h2>
+    <div id="list_expenses">
+        <h3> List of Expenses</h3>
     <ul>
         {% for expense in expenses %}
             <li> ${{expense.expAmount}} - from {{expense.category}} </li>
         {% endfor %}
     </ul>
-    <h3>SUM of incomes</h3>
-    <p> ${{ sumInc}}</p>
-    <h3>SUM of expenses</h3>
-    <p> ${{ sumExp}}</p>
-    <h3>Net Balance</h3>
-    <p> ${{ sumNet}}</p>
-    <script>
-
-    </script>
-
+    </div>
     
+    <div id="sum_incomes">
+        <h3>SUM of incomes</h3>
+        <ul> 
+            <li> 
+                <p> ${{ sumInc}}</p> 
+            </li>
+        </ul> 
+    </div>
+    
+    <div id="sum_expenes">
+        <h3>SUM of expenses</h3>
+        <ul> 
+            <li> 
+                <p> ${{ sumExp}}</p>
+            </li>
+        </ul> 
+    </div>
+    
+    <div id="sum_net">
+        <h3>Net Balance</h3>
+        <ul> 
+            <li> 
+                <p> ${{ sumNet}}</p>
+            </li>
+        </ul> 
+    </div>
+    
+  
+
+</body>   
 
 {% endblock %}

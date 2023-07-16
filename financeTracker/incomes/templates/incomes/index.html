@@ -1,11 +1,17 @@
 {% extends "incomes/layout.html" %}
 
 {% block body %}
+
+<head>
+    <title>Customers</title>
+</head>
+
+<body>
     <h1>all our customers</h1>
     <ul>
         {% for person in appusers %}
         <li> <a href="{% url 'user' person.id %}">{{person}}</a> </li>
         {% endfor %}
     </ul>
-
+</body>
 {% endblock %}
