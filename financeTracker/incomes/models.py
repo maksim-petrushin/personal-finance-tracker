@@ -18,3 +18,11 @@ class Income(models.Model):
     def __str__(self):
         return f"ID: {self.id} | AMOUNT: ${self.incAmount}| CATEGORY: {self.category}"
     
+class Expense(models.Model):
+    person = models.ForeignKey(AppUsers, on_delete=models.PROTECT, related_name="minuses", blank=False, null=True)
+    expAmount = models.FloatField(default=0)
+    category = models.CharField(max_length=64)
+
+    def __str__(self):
+        return f"ID: {self.id} | AMOUNT: ${self.expAmount}| CATEGORY: {self.category}"
+    
