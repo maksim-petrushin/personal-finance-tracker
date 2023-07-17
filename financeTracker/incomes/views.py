@@ -1,9 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Income, AppUsers, Expense
-
+from .forms import RegisterForm
 # Create your views here.
  
+def sign_up(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+    else:
+        form = RegisterForm()
+    return render(request, 'registration/sign-up.html', {"form":form})
+
 def index1(request):
     return render(request, "incomes/index.html",{
         "appusers": AppUsers.objects.all()
