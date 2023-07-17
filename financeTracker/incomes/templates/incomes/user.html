@@ -6,7 +6,7 @@
 
 {% block styles %}
 <style>
-    div {
+    div.profile> div {
         display:none;
     }
 </style>
@@ -16,7 +16,7 @@
 <script>
            
     function showPage(page){
-        document.querySelectorAll('div').forEach(div=>{
+        document.querySelectorAll('div.profile> div').forEach(div=>{
             div.style.display = 'none';
         })
         document.querySelector(`#${page}`).style.display = 'block';
@@ -34,7 +34,7 @@
 {% endblock %}
 
 {% block body %}
-
+<div class="profile">
     <h1> Profile of {{incomes.first.person}}</h1>
     <button data-page="list_incomes">List of Incomes</button>
     <button data-page="list_expenses">List of Expenses</button>
@@ -86,6 +86,8 @@
             </li>
         </ul> 
     </div>
+</div>
+    
 
 
 {% endblock %}
