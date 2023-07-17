@@ -1,34 +1,40 @@
 {% extends "incomes/layout.html" %}
 
-{% block body %}
-<head>
-    <title>Customers</title>
-    <script>
-        function showPage(page){
-            document.querySelectorAll('div').forEach(div=>{
-                div.style.display = 'none';
-            })
-            document.querySelector(`#${page}`).style.display = 'block';
-        }
+{% block title %} 
+    {{incomes.first.person}}
+{% endblock %}
 
-        document.addEventListener('DOMContentLoaded', function(){
-            document.querySelectorAll('button').forEach(button=>{
-                button.onclick = function(){
-                    showPage(this.dataset.page);
-                }
+{% block styles %}
+<style>
+    div {
+        display:none;
+    }
+</style>
+{% endblock %}
 
-            });
+{% block scripts %}
+<script>
+           
+    function showPage(page){
+        document.querySelectorAll('div').forEach(div=>{
+            div.style.display = 'none';
+        })
+        document.querySelector(`#${page}`).style.display = 'block';
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+        document.querySelectorAll('button').forEach(button=>{
+            button.onclick = function(){
+                showPage(this.dataset.page);
+            }
+
         });
-    </script>
-    <style>
-        div {
-            display:none;
-        }
-    </style>
-</head>
+    });
+</script>
+{% endblock %}
 
-<body>
-   
+{% block body %}
+
     <h1> Profile of {{incomes.first.person}}</h1>
     <button data-page="list_incomes">List of Incomes</button>
     <button data-page="list_expenses">List of Expenses</button>
@@ -80,9 +86,6 @@
             </li>
         </ul> 
     </div>
-    
-  
 
-</body>   
 
 {% endblock %}
