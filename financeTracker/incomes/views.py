@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import Income, AppUsers, Expense
 from .forms import RegisterForm
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 # Create your views here.
  
 def sign_up(request):
@@ -16,6 +17,7 @@ def sign_up(request):
         form = RegisterForm()
     return render(request, 'registration/sign-up.html', {"form":form})
 
+@login_required(login_url="/login")
 def index1(request):
     return render(request, "incomes/index.html",{
         "appusers": AppUsers.objects.all()
