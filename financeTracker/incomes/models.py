@@ -12,6 +12,17 @@ class AppUsers(models.Model):
 
 
 class Income(models.Model): 
+    INCOME = "IN"
+    EXPENSE = "EX"
+    TRANSACTION_CHOICES = [
+            (INCOME, "Income"),
+            (EXPENSE, "Expense")
+        ]
+    transaction_category = models.CharField(
+        max_length=2,
+        choices=TRANSACTION_CHOICES,
+        default=INCOME,
+    )
     person = models.ForeignKey(User, on_delete=models.PROTECT, related_name="pluses", blank=False, null=True)
     incAmount = models.FloatField(default=0)
     category = models.CharField(max_length=64)
