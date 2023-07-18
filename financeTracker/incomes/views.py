@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth.models import User
 from .models import Income, AppUsers, Expense
 from .forms import RegisterForm, PostIncome
 from django.contrib.auth import login, logout, authenticate
@@ -34,11 +35,11 @@ def sign_up(request):
 @login_required(login_url="/login")
 def index1(request):
     return render(request, "incomes/index.html",{
-        "appusers": AppUsers.objects.all()
+        "appusers": User.objects.all()
     })
 
 def user(request, user_id):
-    user = AppUsers.objects.get(pk=user_id)
+    user = User.objects.get(pk=user_id)
     return render(request, "incomes/user.html",{
         "incomes": user.pluses.all(),
         "expenses": user.minuses.all(),
@@ -49,14 +50,14 @@ def user(request, user_id):
 
 def incomeSum(user_id):
     sum = 0
-    user = AppUsers.objects.get(pk=user_id).pluses.all()
+    user = User.objects.get(pk=user_id).pluses.all()
     for expense in user:
         sum+=expense.incAmount
     return sum
 
 def expenseSum(user_id):
     sum = 0
-    user = AppUsers.objects.get(pk=user_id).minuses.all()
+    user = User.objects.get(pk=user_id).minuses.all()
     for expense in user:
         sum+=expense.expAmount
     return sum
