@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from .models import Income, AppUsers, Expense
-from .forms import RegisterForm, PostIncome
+from .forms import RegisterForm, PostIncome, PostExpense
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -20,6 +20,18 @@ def create_income(request):
         form = PostIncome()
     return render(request, 'incomes/create_income.html', {"form":form})
 
+@login_required(login_url="/login")
+def create_expense(request):
+    if request.method == 'POST':
+        form = PostExpense(request.POST)
+        if form.is_valid():
+            post=form.save(commit=False)
+            post.person = request.user
+            post.save()
+            return redirect("/home")
+    else:
+        form = PostExpense()
+    return render(request, 'incomes/create_expense.html', {"form":form})
 
 def sign_up(request):
     if request.method == 'POST':
