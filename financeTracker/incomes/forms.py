@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Income, Expense
+from .models import Income
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(required =True)
@@ -15,7 +15,3 @@ class PostIncome(forms.ModelForm):
         model = Income
         fields = ["incAmount", "category","transaction_category", "transaction_date"]
 
-class PostExpense(forms.ModelForm):
-    class Meta:
-        model = Expense
-        fields = ["expAmount", "category", "transaction_date"]
