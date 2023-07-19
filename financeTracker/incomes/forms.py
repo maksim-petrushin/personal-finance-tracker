@@ -13,5 +13,5 @@ class RegisterForm(UserCreationForm):
 class PostIncome(forms.ModelForm):
     class Meta:
         model = Income
-        fields = ["incAmount", "category","transaction_category", "transaction_date"]
+        fields = ["incAmount","transaction_category", "transaction_date"]
 
