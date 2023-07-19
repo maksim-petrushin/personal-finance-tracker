@@ -37,5 +37,7 @@ def sign_up(request):
 
 @login_required(login_url="/login")
 def index1(request):
-    return render(request, "incomes/index.html")
+
+    transactions = Income.objects.filter(person=request.user)
+    return render(request, "incomes/index.html",{"transactions": transactions})
 
