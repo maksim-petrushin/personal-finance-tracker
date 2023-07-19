@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'incomes.apps.IncomesConfig',
-    'users.apps.UsersConfig',
     'crispy_forms',
     'crispy_bootstrap5',
     'django.contrib.admin',
