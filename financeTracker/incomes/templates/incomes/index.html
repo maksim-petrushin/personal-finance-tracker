@@ -1,7 +1,40 @@
 {% extends "incomes/layout.html" %}
 {% block title %} Home
             {% endblock %}
+
+            {% block scripts %}
+            
+            {% endblock %}    
 {% block body %}
+<hr>
+<form method="POST">
+    {% csrf_token %}
+From:<input type="date" name="fromdate">
+To:<input type="date" name="todate">
+<input type="submit" name="Search">
+<hr>
+<center>
+    <table border="2">
+        <tr>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Category</th>
+        </tr>
+        {% for transaction in transactions %}
+        <tr>
+            <td>{{transaction.incAmount}}</td>
+            <td>{{transaction.get_transaction_category_display}}</td>
+            <td>{{transaction.transaction_date}}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td>No transactions yet</td>
+        </tr>
+        {% endfor %}
+    </table>
+</form>
+</center>
+
 {% for transaction in transactions %}
 <div class="card mt-2">
     <div class="card-header"> <strong>{{transaction.person}}</strong></div>
