@@ -1,9 +1,22 @@
 {% extends "incomes/layout.html" %}
-{% block title %}
-Home
+{% block styles %}
+
+    
 {% endblock %}
-   
+{% block title %} Filter
+            {% endblock %}
+
+            {% block scripts %}
+            
+            {% endblock %}    
 {% block body %}
+<hr>
+<form method="POST">
+    {% csrf_token %}
+From:<input type="date" name="fromdate" >
+To:<input type="date" name="todate">
+<input type="submit" name="Search">
+<input type="hidden" name="form_id" value="search">
 <hr>
 <center>
     <table border="2">
@@ -11,24 +24,12 @@ Home
             <th>Amount</th>
             <th>Date</th>
             <th>Category</th>
-            <th>Delete</th>
         </tr>
         {% for transaction in transactions %}
         <tr>
             <td>{{transaction.incAmount}}</td>
             <td>{{transaction.get_transaction_category_display}}</td>
             <td>{{transaction.transaction_date}}</td>
-            <td> 
-                <form method="POST">
-                    {% csrf_token %}
-                        <button type="submit" 
-                        class="btn btn-danger" 
-                        name="transaction-id" 
-                        value="{{transaction.id}}">Delete
-                        </button>
-                </form>
-                
-            </td>
         </tr>
         {% empty %}
         <tr>
@@ -36,8 +37,11 @@ Home
         </tr>
         {% endfor %}
     </table>
-    <a href="{% url 'filter' %}">Filter Expenses</a>
+    
+</form>
 
+<hr>
+<a href="{% url 'index1' %}">View Expenses</a>
 </center>
 
 {% endblock %}

@@ -36,16 +36,27 @@ def sign_up(request):
     return render(request, 'registration/sign-up.html', {"form":form})
 
 @login_required(login_url="/login")
-
-
 def index1(request):
+    transactions = Income.objects.filter(person=request.user)
+    
+    if request.method == "POST":
+        transaction_id = request.POST.get("transaction-id")
+        print(transaction_id)
+        transaction = Income.objects.filter(id=transaction_id).first()
+        if transaction:
+            transaction.delete()
+    return render(request, "incomes/index.html",{"transactions": transactions})
+    
+@login_required(login_url="/login")    
+def filter(request):
     visitor = str(request.user.id)
     if request.method == "POST":
         fromdate = request.POST.get('fromdate')
         todate = request.POST.get('todate')
         searchresult = Income.objects.raw('select * from incomes_income where person_id="'+visitor+'" and transaction_date between "'+fromdate+'" and "'+todate+'"')
-        return render(request, "incomes/index.html",{"transactions": searchresult})
+        return render(request, "incomes/filter.html",{"transactions": searchresult}) 
     else:
+
         transactions = Income.objects.filter(person=request.user)
-        return render(request, "incomes/index.html",{"transactions": transactions})
+        return render(request, "incomes/filter.html",{"transactions": transactions})
 
